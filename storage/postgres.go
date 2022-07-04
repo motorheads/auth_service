@@ -38,7 +38,7 @@ func GetUserByEmail(email string) (*models.User, error) {
 	query := fmt.Sprintf(`
 		SELECT * 
 		FROM users
-		WHRER email=$1
+		WHRER email=%s
 	`, email)
 
 	row := config.DB.QueryRow(query)
