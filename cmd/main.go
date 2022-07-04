@@ -1,15 +1,24 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"database/sql"
+	"fmt"
+
+	"github.com/motorheads/auth_service/config"
+	"github.com/motorheads/auth_service/routes"
 )
 
 func main() {
-	r := fiber.New()
+	db, err := sql.Open("postgres", config.DbURL(config.BuildDBConfig()))
+	if err != nil {
+		fmt.Println("Error while connecting to the database")
+		fmt.Println(err)
+	}
+	config.DB = db
 
-	r.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Test")
-	})
+	defer config.DB.Close()
 
-	r.Listen(":8000")
+	router := routes.New()
+
+	router.Listen(":8081")
 }
