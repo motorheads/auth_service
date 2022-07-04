@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	_ "github.com/lib/pq"
 	"github.com/motorheads/auth_service/config"
 	"github.com/motorheads/auth_service/routes"
@@ -20,6 +21,10 @@ func main() {
 	defer config.DB.Close()
 
 	router := routes.New()
+
+	router.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+	}))
 
 	router.Listen(":8081")
 }

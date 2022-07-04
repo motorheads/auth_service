@@ -15,6 +15,7 @@ github.com/gofiber/fiber/v2/internal/isatty
 github.com/gofiber/fiber/v2/internal/msgp
 github.com/gofiber/fiber/v2/internal/schema
 github.com/gofiber/fiber/v2/internal/uuid
+github.com/gofiber/fiber/v2/middleware/cors
 github.com/gofiber/fiber/v2/utils
 # github.com/klauspost/compress v1.15.0
 ## explicit; go 1.15
