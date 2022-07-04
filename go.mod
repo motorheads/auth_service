@@ -2,7 +2,10 @@ module github.com/motorheads/auth_service
 
 go 1.18
 
-require github.com/gofiber/fiber/v2 v2.34.1
+require (
+	github.com/gofiber/fiber/v2 v2.34.1
+	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
