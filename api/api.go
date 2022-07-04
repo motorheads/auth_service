@@ -94,9 +94,33 @@ func Login(c *fiber.Ctx) error {
 }
 
 func User(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"status": "ok",
+	cookie := c.Cookies("jwt")
+
+	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(SecretKey), nil
 	})
+
+	if err != nil {
+		c.Status(fiber.StatusUnauthorized)
+		return c.JSON(fiber.Map{
+			"message": "unauthenticated",
+		})
+	}
+
+	claims := token.Claims.(*jwt.StandardClaims)
+
+	user, err := storage.GetUserById(claims.Issuer)
+	if err != nil {
+		fmt.Println("User not found")
+		fmt.Println(err)
+
+		c.Status(fiber.StatusNotFound)
+		return c.JSON(fiber.Map{
+			"message": "user not found",
+		})
+	}
+
+	return c.JSON(user)
 }
 
 func Logout(c *fiber.Ctx) error {
