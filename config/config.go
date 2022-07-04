@@ -21,7 +21,7 @@ func BuildDBConfig() *DBConfig {
 		Port:     5432,
 		User:     "postgres",
 		Password: "password",
-		Database: "catalog_service",
+		Database: "auth_service",
 	}
 	return &dbConfig
 }
