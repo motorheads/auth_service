@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
+	_ "github.com/lib/pq"
 	"github.com/motorheads/auth_service/config"
 	"github.com/motorheads/auth_service/routes"
 )
