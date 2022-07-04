@@ -7,6 +7,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
+	"github.com/motorheads/auth_service/models"
 	"github.com/motorheads/auth_service/storage"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -14,12 +15,19 @@ import (
 var SecretKey = "key"
 
 func Register(c *fiber.Ctx) error {
-	var user map[string]string
+	var data map[string]string
 
-	if err := c.BodyParser(&user); err != nil {
+	if err := c.BodyParser(&data); err != nil {
 		fmt.Println("Error while parsing body")
 		fmt.Println(err)
 		return err
+	}
+
+	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+	user := models.User{
+		Name:     data["name"],
+		Email:    data["email"],
+		Password: password,
 	}
 
 	err := storage.CreateUser(user)
