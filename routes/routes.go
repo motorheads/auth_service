@@ -8,8 +8,6 @@ import (
 func New() *fiber.App {
 	router := fiber.New()
 
-	router.Group("/api")
-
 	router.Post("/api/register", api.Register)
 	router.Post("/api/login", api.Login)
 	router.Get("/api/user", api.User)
