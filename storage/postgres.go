@@ -48,13 +48,13 @@ func GetUserByEmail(email string) (*models.User, error) {
 func GetUserById(id string) (*models.User, error) {
 	var user models.User
 
-	query := fmt.Sprintf(`
+	query := `
 		SELECT * 
-		FROM users
-		WHRER id=%s
-	`, id)
+		FROM users 
+		WHERE id=$1
+	`
 
-	row := config.DB.QueryRow(query)
+	row := config.DB.QueryRow(query, id)
 
 	err := row.Scan(
 		&user.Id,
