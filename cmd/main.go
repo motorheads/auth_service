@@ -24,7 +24,12 @@ func main() {
 
 	router.Use(cors.New(cors.Config{
 		AllowCredentials: true,
+		AllowHeaders:     "*",
+		AllowOrigins:     "*",
+		AllowMethods:     "*",
 	}))
+
+	// router.Use(cors.New())
 
 	router.Listen(":8081")
 }

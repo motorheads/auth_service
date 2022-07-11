@@ -27,6 +27,8 @@ github.com/klauspost/compress/zlib
 github.com/lib/pq
 github.com/lib/pq/oid
 github.com/lib/pq/scram
+# github.com/rs/cors v1.8.2
+## explicit; go 1.13
 # github.com/valyala/bytebufferpool v1.0.0
 ## explicit
 github.com/valyala/bytebufferpool
